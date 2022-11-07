@@ -1,5 +1,5 @@
-resource "google_container_node_pool" "tfer--nginx-cluster_default-pool" {
-  cluster            = "${google_container_cluster.tfer--nginx-cluster.name}"
+resource "google_container_node_pool" "nginx-cluster_node-pool" {
+  cluster            = "${google_container_cluster.nginx-cluster.name}"
   initial_node_count = "3"
   location           = "asia-south1-a"
 
@@ -9,7 +9,7 @@ resource "google_container_node_pool" "tfer--nginx-cluster_default-pool" {
   }
 
   max_pods_per_node = "110"
-  name              = "default-pool"
+  name              = "node-pool"
 
   node_config {
     disk_size_gb    = "100"
