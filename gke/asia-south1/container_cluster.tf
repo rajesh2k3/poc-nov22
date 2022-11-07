@@ -1,4 +1,4 @@
-resource "google_container_cluster" "tfer--nginx-cluster" {
+resource "google_container_cluster" "nginx-cluster" {
   addons_config {
     gce_persistent_disk_csi_driver_config {
       enabled = "true"
