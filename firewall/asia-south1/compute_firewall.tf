@@ -1,4 +1,4 @@
-resource "google_compute_firewall" "tfer--default-allow-icmp" {
+resource "google_compute_firewall" "fw-allow-icmp" {
   allow {
     protocol = "icmp"
   }
@@ -6,14 +6,14 @@ resource "google_compute_firewall" "tfer--default-allow-icmp" {
   description   = "Allow ICMP from anywhere"
   direction     = "INGRESS"
   disabled      = "false"
-  name          = "default-allow-icmp"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  name          = "fw-allow-icmp"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "65534"
   project       = "poc-project-367814"
   source_ranges = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "tfer--default-allow-internal" {
+resource "google_compute_firewall" "fw-allow-internal" {
   allow {
     ports    = ["0-65535"]
     protocol = "tcp"
@@ -28,17 +28,17 @@ resource "google_compute_firewall" "tfer--default-allow-internal" {
     protocol = "icmp"
   }
 
-  description   = "Allow internal traffic on the default network"
+  description   = "Allow internal traffic on the fw network"
   direction     = "INGRESS"
   disabled      = "false"
-  name          = "default-allow-internal"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  name          = "fw-allow-internal"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "65534"
   project       = "poc-project-367814"
   source_ranges = ["10.128.0.0/9"]
 }
 
-resource "google_compute_firewall" "tfer--default-allow-rdp" {
+resource "google_compute_firewall" "fw-allow-rdp" {
   allow {
     ports    = ["3389"]
     protocol = "tcp"
@@ -47,14 +47,14 @@ resource "google_compute_firewall" "tfer--default-allow-rdp" {
   description   = "Allow RDP from anywhere"
   direction     = "INGRESS"
   disabled      = "false"
-  name          = "default-allow-rdp"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  name          = "fw-allow-rdp"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "65534"
   project       = "poc-project-367814"
   source_ranges = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "tfer--default-allow-ssh" {
+resource "google_compute_firewall" "fw-allow-ssh" {
   allow {
     ports    = ["22"]
     protocol = "tcp"
@@ -63,14 +63,14 @@ resource "google_compute_firewall" "tfer--default-allow-ssh" {
   description   = "Allow SSH from anywhere"
   direction     = "INGRESS"
   disabled      = "false"
-  name          = "default-allow-ssh"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  name          = "fw-allow-ssh"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "65534"
   project       = "poc-project-367814"
   source_ranges = ["0.0.0.0/0"]
 }
 
-resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-all" {
+resource "google_compute_firewall" "gke-nginx-cluster-a6ffdb25-all" {
   allow {
     protocol = "ah"
   }
@@ -98,14 +98,14 @@ resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-all" {
   direction     = "INGRESS"
   disabled      = "false"
   name          = "gke-nginx-cluster-a6ffdb25-all"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["10.88.0.0/14"]
   target_tags   = ["gke-nginx-cluster-a6ffdb25-node"]
 }
 
-resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-exkubelet" {
+resource "google_compute_firewall" "gke-nginx-cluster-a6ffdb25-exkubelet" {
   deny {
     ports    = ["10255"]
     protocol = "tcp"
@@ -114,14 +114,14 @@ resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-exkubelet" 
   direction     = "INGRESS"
   disabled      = "false"
   name          = "gke-nginx-cluster-a6ffdb25-exkubelet"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["gke-nginx-cluster-a6ffdb25-node"]
 }
 
-resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-inkubelet" {
+resource "google_compute_firewall" "gke-nginx-cluster-a6ffdb25-inkubelet" {
   allow {
     ports    = ["10255"]
     protocol = "tcp"
@@ -130,7 +130,7 @@ resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-inkubelet" 
   direction     = "INGRESS"
   disabled      = "false"
   name          = "gke-nginx-cluster-a6ffdb25-inkubelet"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "999"
   project       = "poc-project-367814"
   source_ranges = ["10.88.0.0/14"]
@@ -156,14 +156,14 @@ resource "google_compute_firewall" "tfer--gke-nginx-cluster-a6ffdb25-vms" {
   direction     = "INGRESS"
   disabled      = "false"
   name          = "gke-nginx-cluster-a6ffdb25-vms"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["10.128.0.0/9"]
   target_tags   = ["gke-nginx-cluster-a6ffdb25-node"]
 }
 
-resource "google_compute_firewall" "tfer--k8s-939c541cc59b92e6-node-http-hc" {
+resource "google_compute_firewall" "k8s-939c541cc59b92e6-node-http-hc" {
   allow {
     ports    = ["10256"]
     protocol = "tcp"
@@ -173,14 +173,14 @@ resource "google_compute_firewall" "tfer--k8s-939c541cc59b92e6-node-http-hc" {
   direction     = "INGRESS"
   disabled      = "false"
   name          = "k8s-939c541cc59b92e6-node-http-hc"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["130.211.0.0/22", "209.85.152.0/22", "209.85.204.0/22", "35.191.0.0/16"]
   target_tags   = ["gke-nginx-cluster-a6ffdb25-node"]
 }
 
-resource "google_compute_firewall" "tfer--k8s-fw-ac0e08bc95fc54028bbe5dbc0e58c7c5" {
+resource "google_compute_firewall" "k8s-fw-ac0e08bc95fc54028bbe5dbc0e58c7c5" {
   allow {
     ports    = ["443", "80"]
     protocol = "tcp"
@@ -190,14 +190,14 @@ resource "google_compute_firewall" "tfer--k8s-fw-ac0e08bc95fc54028bbe5dbc0e58c7c
   direction     = "INGRESS"
   disabled      = "false"
   name          = "k8s-fw-ac0e08bc95fc54028bbe5dbc0e58c7c5"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--default_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_fw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["gke-nginx-cluster-a6ffdb25-node"]
 }
 
-resource "google_compute_firewall" "tfer--raj-fw" {
+resource "google_compute_firewall" "raj-fw" {
   allow {
     protocol = "all"
   }
@@ -206,7 +206,7 @@ resource "google_compute_firewall" "tfer--raj-fw" {
   direction     = "INGRESS"
   disabled      = "false"
   name          = "raj-fw"
-  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_tfer--raj-nw_self_link}"
+  network       = "${data.terraform_remote_state.networks.outputs.google_compute_network_raj-nw_self_link}"
   priority      = "1000"
   project       = "poc-project-367814"
   source_ranges = ["192.170.2.0/24"]
