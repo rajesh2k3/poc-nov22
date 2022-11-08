@@ -3,7 +3,7 @@ data "terraform_remote_state" "networks" {
 
   config = {
     #path = "../../../../../generated/google/poc-project-367814/networks/asia-south1/terraform.tfstate"
-    path = "../../../poc-project-367814/networks/asia-south1/terraform.tfstate"
+    path = "../../poc-nov22/networks/asia-south1/terraform.tfstate"
   }
 }
 
@@ -12,7 +12,7 @@ data "terraform_remote_state" "subnetworks" {
 
   config = {
     #path = "../../../../../generated/google/poc-project-367814/subnetworks/asia-south1/terraform.tfstate"
-    path = "../../../poc-project-367814/subnetworks/asia-south1/terraform.tfstate"
+    path = "../../poc-nov22/subnetworks/asia-south1/terraform.tfstate"
     
   }
 }
