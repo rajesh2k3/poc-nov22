@@ -53,7 +53,7 @@ resource "google_container_cluster" "nginx-cluster" {
 
   monitoring_service = "monitoring.googleapis.com/kubernetes"
   name               = "nginx-cluster"
-  network            = "projects/poc-project-367814/global/networks/default"
+  network            = "projects/poc-project-367814/global/networks/ng-network"
 
   network_policy {
     enabled  = "false"
@@ -79,5 +79,5 @@ resource "google_container_cluster" "nginx-cluster" {
     enabled = "false"
   }
 
-  subnetwork = "projects/poc-project-367814/regions/asia-south1/subnetworks/default"
+  subnetwork = "projects/poc-project-367814/regions/asia-south1/subnetworks/ng-subnet"
 }
